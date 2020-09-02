@@ -1,0 +1,13 @@
+global:
+    formato: '&7[g] %luckperms_prefix% %clans_prefix%&7%player%&9&l>&7<mensagem>'
+    broadcast: true
+    raio: 0
+    restrito: false
+    permissao: chat.global
+    
+local:
+    formato: '&e[l] %luckperms_prefix% %clans_prefix%&e%player%&9&l>&e<mensagem>'
+    broadcast: false
+    raio: 200
+    restrito: false
+    permissao: chat.global
