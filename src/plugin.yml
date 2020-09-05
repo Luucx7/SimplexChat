@@ -1,6 +1,6 @@
 name: SimplexChat
-version: 1.3.0
-api-version: 1.13
+version: 1.5.0
+api-version: 1.16
 main: me.luucx7.simplexchat.SimplexChat
 author: Luucx7
 depend: [PlaceholderAPI]
@@ -8,6 +8,5 @@ commands:
     chatcor:
         aliases: [chatcolor, corchat]
         permission: chat.colorido
-    g:
-        aliases: [global, globalchat]
-        permission: chat.global
+    simplexchat:
+    
