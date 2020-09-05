@@ -27,9 +27,11 @@ public class Mensagem {
 	
 	public void preparar() {
 		String formato = ChatColor.translateAlternateColorCodes('&', config.getString(canal+".formato"));
-		String playerMsg = "";
-		for (int i = 0;i<mensagem.length;i++) {
-			playerMsg = playerMsg + " "+ mensagem[i];
+		String playerMsg = mensagem[0];
+		if (mensagem.length>1) {
+			for (int i = 1;i<mensagem.length;i++) {
+				playerMsg = playerMsg + " "+ mensagem[i];
+			}
 		}
 
 		playerMsg = PlaceholderAPI.setPlaceholders(sender, playerMsg);
@@ -40,7 +42,7 @@ public class Mensagem {
 		}
 		
 		formato = PlaceholderAPI.setPlaceholders(sender, formato);
-		formato = formato.replace("<mensagem>", playerMsg).replace("%player%", sender.getName());
+		formato = formato.replace("<message>", playerMsg).replace("<player>", sender.getName());
 		
 		this.mensagemFinal = formato;
 	}

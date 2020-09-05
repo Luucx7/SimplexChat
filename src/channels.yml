@@ -1,54 +1,80 @@
+#            SimplexChat by Luucx7
+#
+#            Channels configuration
+# 
+# - > Keys can't be the same.
+# - > Full support for PlaceholdersAPI on channel format
+# - > Native placeholders:
+#   - <player> - Who sent the message
+#   - <message> - The message
+#
+
+#
+#                Local channel
+# The basic channel when you type without commands
+#       !!!! DONT REMOVE THIS CHANNEL !!!
+#
 local:
-    formato: '&e[l] %luckperms_prefix% %clans_prefix%&e%player%&9&l>&e<mensagem>'
+    # Message format
+    # You can use any PAPI placeholder here
+    # Message is replaced on <mensagem>
+    formato: '&e[l] %luckperms_prefix% %clans_prefix%&e<player>&9&l> &e%chat_cor%<message>'
+    # Should this plugin handle game chat?
+    # Disable if you only need channel commands or
+    # whatever reason. Vanilla chat will not be blocked.
     habilitar: true
+    # Should this chat messages be sent to everyone?
     broadcast: false
+    # Radius to receive a message if the option above is false
     raio: 200
+    # Should this channel have a permission?
     restrito: false
+    # The permission of this channel
     permissao: chat.global
 global:
-    formato: '&7[g] %luckperms_prefix% %clans_prefix%&7%player%&9&l>&7<mensagem>'
+    formato: '&7[g] %luckperms_prefix% %clans_prefix%&7<player>&9&l> &7%chat_cor%<message>'
     comando: 'g'
     broadcast: true
     raio: 0
     restrito: false
     permissao: chat.global
 vip:
-    formato: '&5[VIP] %luckperms_prefix% %clans_prefix%&5%player%&9&l>&5<mensagem>'
+    formato: '&5[VIP] %luckperms_prefix% %clans_prefix%&5<player>&9&l> &5%chat_cor%<message>'
     comando: 'cv'
     broadcast: true
     raio: 0
     restrito: false
     permissao: chat.vip
 construtor:
-    formato: '&f[cb] %luckperms_prefix% &f%player%:<mensagem>'
+    formato: '&f[cb] %luckperms_prefix% &f<player>: <message>'
     comando: 'cb'
     broadcast: true
     raio: 0
     restrito: true
     permissao: chat.con
 helper:
-    formato: '&6[helper] %luckperms_prefix% &6%player%:<mensagem>'
+    formato: '&6[helper] %luckperms_prefix% &6<player>: <message>'
     comando: 'h'
     broadcast: true
     raio: 0
     restrito: true
     permissao: chat.helper
 mod:
-    formato: '&2[mod] %luckperms_prefix% &2%player%:<mensagem>'
+    formato: '&2[mod] %luckperms_prefix% &2<player>: <message>'
     comando: 'm'
     broadcast: true
     raio: 0
     restrito: true
     permissao: chat.mod
 admin:
-    formato: '&c[Admin] %luckperms_prefix% &c%player%:<mensagem>'
+    formato: '&c[Admin] %luckperms_prefix% &c<player>: <message>'
     comando: 'a'
     broadcast: true
     raio: 0
     restrito: true
     permissao: chat.admin
 devedor:
-    formato: '&b[Devedor] %luckperms_prefix% &b%player%:<mensagem>'
+    formato: '&b[Devedor] %luckperms_prefix% &b<player>: <message>'
     comando: 'dv'
     broadcast: true
     raio: 0

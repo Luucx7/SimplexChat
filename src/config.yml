@@ -1,9 +1,39 @@
+#
+# Message sent when the player doesnt have permission for
+# a channel or any command of the plugin.
+#
 no_permission: '&cVocê não tem permissão!'
+
+#
+# Sent when the player tries to do chat without any text
+#
 channel_usage_message: '&cUso: /{command} <mensagem>'
+
+#
+# Text sent when plugin is reloaded
+#
 plugin_reloaded: '&aPlugin recarregado.'
+
+#
+# Related to the /chatcolor command
+# You can get the color in any plugin with PAPI
+# the placeholder is %chat_color% and returns empty 
+# when there is no color
+#
 colors:
+    #
+    # If you server isn't 1.16, this change will take no effect
+    # Disable if you want to remove RGB from /chatcolor
+    # It will use vanilla color codes instead
+    #
+    enable_rgb: true
+    # Console can't choose a color
     only_players: '&cDisponível apenas para jogadores!'
+    # No argument provided on command
     no_arg: '&cDigite uma cor! /chatcor #<cor>'
+    # Chat color removed
     removed: '&aVocê removeu sua cor de chat!'
+    # Invalid HEX color
     invalid: '&cDigite uma cor hexadecimal válida! /chatcor #<cor>'
-    success: '&aAs cores do seu chat foram alteradas com sucesso!'
+    # Chatcolor changed
+    success: '&aA cor de seu chat foi alterada para %chat_cor%esta.'

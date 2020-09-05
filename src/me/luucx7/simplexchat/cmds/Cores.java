@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.luucx7.simplexchat.SimplexChat;
 import net.md_5.bungee.api.ChatColor;
 
@@ -23,7 +24,7 @@ public class Cores implements CommandExecutor {
 			s.sendMessage(getString("colors.only_players"));
 			return true;
 		}
-		if (!s.hasPermission("chat.setcolor")) {
+		if (!s.hasPermission("chat.setcor")) {
 			s.sendMessage(getString("no_permission"));
 			return true;
 		}
@@ -43,7 +44,7 @@ public class Cores implements CommandExecutor {
         	return true;
         }
         colors.put(player.getName().toLowerCase(), args[0]);
-        s.sendMessage(getString("colors.success"));
+        s.sendMessage(PlaceholderAPI.setPlaceholders((Player) s, getString("colors.success")));
 		return false;
 	}
 	
