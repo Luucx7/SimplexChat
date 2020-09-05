@@ -7,7 +7,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-//import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.ChatColor;
 
 public class Mensagem {
@@ -58,7 +57,7 @@ public class Mensagem {
 		ArrayList<Player> recebedores = new ArrayList<Player>();
 		int chanelRadius = config.getInt(canal+".raio");
 		
-		Bukkit.getOnlinePlayers().stream().filter(p -> p.getLocation().distance(sender.getLocation())<=chanelRadius).forEach(p -> recebedores.add(p));
+		Bukkit.getOnlinePlayers().stream().filter(p -> p.getLocation().getWorld().getName().equals(sender.getLocation().getWorld().getName())).filter(p -> p.getLocation().distance(sender.getLocation())<=chanelRadius).forEach(p -> recebedores.add(p));
 		
 		if (config.getBoolean(canal+".restrito")) {
 			final String permissão = config.getString(canal+".permissao");
