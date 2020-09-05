@@ -16,7 +16,7 @@ public class Mensagem {
 	String mensagemFinal;
 	String canal;
 	
-	private static FileConfiguration config = SimplexChat.instance.getConfig();
+	private static FileConfiguration config = SimplexChat.cConfig;
 
 	public Mensagem(Player sender, String[] mensagem, String canal) {
 		this.sender = sender;

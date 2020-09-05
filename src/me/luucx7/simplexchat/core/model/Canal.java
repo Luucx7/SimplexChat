@@ -15,7 +15,7 @@ public class Canal {
 	String permissao;
 	int raio;
 	
-	public static FileConfiguration config = SimplexChat.instance.getConfig();
+	public static FileConfiguration config = SimplexChat.cConfig;
 	
 	public Canal(String nome) {
 		this.nome = nome;

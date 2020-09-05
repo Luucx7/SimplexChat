@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 
 import me.luucx7.simplexchat.SimplexChat;
 import me.luucx7.simplexchat.core.CanaisManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class SimplexCmd implements CommandExecutor {
 
@@ -18,7 +19,7 @@ public class SimplexCmd implements CommandExecutor {
 		}
 		if (args[0].equalsIgnoreCase("reload")) {
 			if (!(s.hasPermission("simplexchat.reload"))) {
-				s.sendMessage("§cVocê não tem permissão!");
+				s.sendMessage(getString("no_permission"));
 				return true;
 			}
 			
@@ -26,9 +27,12 @@ public class SimplexCmd implements CommandExecutor {
 			SimplexChat.instance.reloadConfig();
 			CanaisManager.load();
 			
-			s.sendMessage("§aPlugin recarregado.");
+			s.sendMessage(getString("plugin_reloaded"));
 		}
 		return false;
 	}
-
+	
+	private static String getString(String path) {
+		return ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString(path));
+	}
 }

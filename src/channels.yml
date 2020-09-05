@@ -1,0 +1,56 @@
+local:
+    formato: '&e[l] %luckperms_prefix% %clans_prefix%&e%player%&9&l>&e<mensagem>'
+    habilitar: true
+    broadcast: false
+    raio: 200
+    restrito: false
+    permissao: chat.global
+global:
+    formato: '&7[g] %luckperms_prefix% %clans_prefix%&7%player%&9&l>&7<mensagem>'
+    comando: 'g'
+    broadcast: true
+    raio: 0
+    restrito: false
+    permissao: chat.global
+vip:
+    formato: '&5[VIP] %luckperms_prefix% %clans_prefix%&5%player%&9&l>&5<mensagem>'
+    comando: 'cv'
+    broadcast: true
+    raio: 0
+    restrito: false
+    permissao: chat.vip
+construtor:
+    formato: '&f[cb] %luckperms_prefix% &f%player%:<mensagem>'
+    comando: 'cb'
+    broadcast: true
+    raio: 0
+    restrito: true
+    permissao: chat.con
+helper:
+    formato: '&6[helper] %luckperms_prefix% &6%player%:<mensagem>'
+    comando: 'h'
+    broadcast: true
+    raio: 0
+    restrito: true
+    permissao: chat.helper
+mod:
+    formato: '&2[mod] %luckperms_prefix% &2%player%:<mensagem>'
+    comando: 'm'
+    broadcast: true
+    raio: 0
+    restrito: true
+    permissao: chat.mod
+admin:
+    formato: '&c[Admin] %luckperms_prefix% &c%player%:<mensagem>'
+    comando: 'a'
+    broadcast: true
+    raio: 0
+    restrito: true
+    permissao: chat.admin
+devedor:
+    formato: '&b[Devedor] %luckperms_prefix% &b%player%:<mensagem>'
+    comando: 'dv'
+    broadcast: true
+    raio: 0
+    restrito: true
+    permissao: chat.devedor

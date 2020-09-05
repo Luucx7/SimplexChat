@@ -11,6 +11,7 @@ import me.luucx7.simplexchat.Mensagem;
 import me.luucx7.simplexchat.SimplexChat;
 import me.luucx7.simplexchat.core.CanaisManager;
 import me.luucx7.simplexchat.core.model.Canal;
+import net.md_5.bungee.api.ChatColor;
 
 public class Canais extends Command {
 
@@ -31,13 +32,13 @@ public class Canais extends Command {
 		
 		if (canal.isRestrito()) {
 			if (!s.hasPermission(canal.getPermissao())) {
-				s.sendMessage("§cVocê não tem permissão!");
+				s.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("no_permission")));
 				return true;
 			}
 		}
 		
 		if (args.length==0) {
-			s.sendMessage("§cUso: /"+comando.toLowerCase()+" <mensagem>");
+			s.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("channel_usage_message").replace("{command}", comando.toLowerCase())));
 			return true;
 		}
 		

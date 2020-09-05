@@ -1,4 +1,4 @@
-package me.luucx7.simplexchat;
+package me.luucx7.simplexchat.cmds;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -9,6 +9,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.luucx7.simplexchat.SimplexChat;
+import net.md_5.bungee.api.ChatColor;
+
 public class Cores implements CommandExecutor {
 	
     private static HashMap<String, String> colors = new HashMap<>();
@@ -17,26 +20,30 @@ public class Cores implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender s, Command c, String arg, String[] args) {
 		if (!(s instanceof Player)) {
-			s.sendMessage("§cDisponível apenas para jogadores!");
+			s.sendMessage(getString("colors.only_players"));
+			return true;
+		}
+		if (!s.hasPermission("chat.setcolor")) {
+			s.sendMessage(getString("no_permission"));
 			return true;
 		}
 		if (args.length==0) {
-			s.sendMessage("§cDigite uma cor! /chatcor #<cor>");
+			s.sendMessage(getString("colors.no_arg"));
 			return true;
 		}
 		Player player = (Player) s;
         if (args[0].equalsIgnoreCase("limpar")) {
             colors.remove(player.getName().toLowerCase());
-            s.sendMessage("§aVocê removeu sua cor de chat!");
+            s.sendMessage(getString("colors.removed"));
             return true;
         }
 
         if(!validate(args[0])) {
-        	s.sendMessage("§cDigite uma cor hexadecimal válida! /chatcor #<cor>");
+        	s.sendMessage(getString("colors.invalid"));
         	return true;
         }
         colors.put(player.getName().toLowerCase(), args[0]);
-        player.sendMessage("§aAs cores do seu chat foram alteradas com sucesso!");
+        s.sendMessage(getString("colors.success"));
 		return false;
 	}
 	
@@ -49,5 +56,8 @@ public class Cores implements CommandExecutor {
         return matcher.matches();
     }
 
+	private static String getString(String path) {
+		return ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString(path));
+	}
 
 }

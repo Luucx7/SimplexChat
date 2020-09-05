@@ -15,7 +15,7 @@ public class Local implements Listener {
 		if (ev.isCancelled()) {
 			return;
 		}
-		if (!SimplexChat.instance.getConfig().getBoolean("local.habilitar")) {
+		if (!SimplexChat.cConfig.getBoolean("local.habilitar")) {
 			return;
 		}
 		ev.setCancelled(true);

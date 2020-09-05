@@ -12,7 +12,7 @@ public class CanaisManager {
 	
 	public static LinkedHashMap<Canal, CommandManager> canaisCache = new LinkedHashMap<Canal, CommandManager>();
 	
-	private static FileConfiguration config = SimplexChat.instance.getConfig();
+	private static FileConfiguration config = SimplexChat.cConfig;
 
 	public static void load() {
 		config.getKeys(false).stream().filter(key -> !key.equals("local")).forEach(key -> {
@@ -27,8 +27,6 @@ public class CanaisManager {
 	
 	public static void disable() {
 		canaisCache.keySet().stream().forEach(canal -> {
-			//CommandMap map = canaisCache.get(canal).getCommandMap();
-			//SimplexChat.instance.getCommand(canal.getComando()).unregister(map);
 			canaisCache.get(canal).unregister(canal.getComando());
 		});
 	}
