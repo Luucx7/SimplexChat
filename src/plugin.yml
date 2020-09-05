@@ -1,6 +1,6 @@
 name: SimplexChat
-version: 1.5.2
-api-version: 1.16
+version: 1.5.3
+api-version: 1.13
 main: me.luucx7.simplexchat.SimplexChat
 author: Luucx7
 depend: [PlaceholderAPI]

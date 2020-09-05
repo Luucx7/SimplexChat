@@ -36,4 +36,4 @@ colors:
     # Invalid HEX color
     invalid: '&cDigite uma cor hexadecimal válida! /chatcor #<cor>'
     # Chatcolor changed
-    success: '&aA cor de seu chat foi alterada para %chat_cor%esta.'
+    success: '&aA cor de seu chat foi alterada para %chat_color%esta.'

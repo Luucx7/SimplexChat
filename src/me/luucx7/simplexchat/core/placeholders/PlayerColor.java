@@ -106,13 +106,17 @@ public class PlayerColor extends PlaceholderExpansion {
     	if (player==null) {
     		return null;
     	}
-    	if (!identifier.equals("cor")) {
+    	if (!identifier.equals("color")) {
     		return null;
     	}
     	String color = Cores.getPlayerColor(player);
     	if (color=="") {
     		return "";
     	}
-    	return ""+ChatColor.of(color);
+    	
+    	if (SimplexChat.useRGB) {
+    		return ""+ChatColor.of(color);
+    	}
+    	return ""+ChatColor.translateAlternateColorCodes('&', color);
     }
 }

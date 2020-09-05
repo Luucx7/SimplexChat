@@ -17,6 +17,7 @@ public class Cores implements CommandExecutor {
 	
     private static HashMap<String, String> colors = new HashMap<>();
     private static final Pattern PATTTERN =Pattern.compile("#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})");
+    public static final Pattern LEGACY = Pattern.compile("&([0-9a-f]{1})");
 	
 	@Override
 	public boolean onCommand(CommandSender s, Command c, String arg, String[] args) {
@@ -54,7 +55,12 @@ public class Cores implements CommandExecutor {
 
 	private boolean validate(String hexColor) {
         Matcher matcher = PATTTERN.matcher(hexColor);
-        return matcher.matches();
+        Matcher legacyMatch = LEGACY.matcher(hexColor);
+        
+        if (SimplexChat.useRGB) {
+        	return matcher.matches();
+        }
+        return legacyMatch.matches();
     }
 
 	private static String getString(String path) {

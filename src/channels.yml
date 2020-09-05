@@ -18,7 +18,7 @@ local:
     # Message format
     # You can use any PAPI placeholder here
     # Message is replaced on <mensagem>
-    formato: '&e[l] %luckperms_prefix% %clans_prefix%&e<player>&9&l> &e%chat_cor%<message>'
+    formato: '&e[l] %luckperms_prefix% %clans_prefix%&e<player>&9&l> &e%chat_color%<message>'
     # Should this plugin handle game chat?
     # Disable if you only need channel commands or
     # whatever reason. Vanilla chat will not be blocked.
@@ -32,7 +32,7 @@ local:
     # The permission of this channel
     permissao: chat.global
 global:
-    formato: '&7[g] %luckperms_prefix% %clans_prefix%&7<player>&9&l> &7%chat_cor%<message>'
+    formato: '&7[g] %luckperms_prefix% %clans_prefix%&7<player>&9&l> &7%chat_color%<message>'
     comando: 'g'
     broadcast: true
     raio: 0
