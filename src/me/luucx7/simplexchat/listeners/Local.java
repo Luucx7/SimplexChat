@@ -5,8 +5,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import me.luucx7.simplexchat.Mensagem;
 import me.luucx7.simplexchat.SimplexChat;
+import me.luucx7.simplexchat.core.model.Mensagem;
 
 public class Local implements Listener {
 

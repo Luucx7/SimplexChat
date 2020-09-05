@@ -7,10 +7,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.luucx7.simplexchat.Mensagem;
 import me.luucx7.simplexchat.SimplexChat;
 import me.luucx7.simplexchat.core.CanaisManager;
 import me.luucx7.simplexchat.core.model.Canal;
+import me.luucx7.simplexchat.core.model.Mensagem;
 import net.md_5.bungee.api.ChatColor;
 
 public class Canais extends Command {

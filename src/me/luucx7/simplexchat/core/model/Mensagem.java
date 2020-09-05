@@ -1,4 +1,4 @@
-package me.luucx7.simplexchat;
+package me.luucx7.simplexchat.core.model;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import me.luucx7.simplexchat.SimplexChat;
 import net.md_5.bungee.api.ChatColor;
 
 public class Mensagem {
