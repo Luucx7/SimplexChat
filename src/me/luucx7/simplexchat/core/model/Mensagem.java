@@ -8,15 +8,17 @@ import org.bukkit.entity.Player;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.luucx7.simplexchat.SimplexChat;
+import me.luucx7.simplexchat.core.minedown.MineDown;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
 
 public class Mensagem {
-	
+
 	final Player sender;
 	String[] mensagem;
-	String mensagemFinal;
+	BaseComponent[] mensagemFinal;
 	String canal;
-	
+
 	private static FileConfiguration config = SimplexChat.cConfig;
 
 	public Mensagem(Player sender, String[] mensagem, String canal) {
@@ -24,7 +26,7 @@ public class Mensagem {
 		this.mensagem = mensagem;
 		this.canal = canal;
 	}
-	
+
 	public void preparar() {
 		String formato = ChatColor.translateAlternateColorCodes('&', config.getString(canal+".formato"));
 		String playerMsg = mensagem[0];
@@ -34,41 +36,43 @@ public class Mensagem {
 			}
 		}
 
-		playerMsg = PlaceholderAPI.setPlaceholders(sender, playerMsg);
 		if (sender.hasPermission("chat.colorido")) {
 			playerMsg = ChatColor.translateAlternateColorCodes('&', playerMsg);
 		} else {
-			playerMsg = ChatColor.stripColor(playerMsg);
+			playerMsg = ChatColor.stripColor(playerMsg).replace("", "");
 		}
-		
-		formato = PlaceholderAPI.setPlaceholders(sender, formato);
-		formato = formato.replace("<message>", playerMsg).replace("<player>", sender.getName());
-		
-		this.mensagemFinal = formato;
+
+		formato = formato.replace("<message>", playerMsg)
+				.replace("<player>", sender.getName()
+				.replace("show_entity=", "")
+				.replace("show_item=", "")
+				);
+
+		mensagemFinal = MineDown.parse(PlaceholderAPI.setPlaceholders(sender, formato));
 	}
-	
+
 	public void enviar() {
 		if (config.getBoolean(canal+".broadcast")) {
 			if (config.getBoolean(canal+".restrito")) {
-				Bukkit.broadcast(mensagemFinal, config.getString(canal+".permissao"));
+				Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission(config.getString(canal+".permissao"))).forEach(p -> p.spigot().sendMessage(mensagemFinal));
 				return;
 			}
-			Bukkit.broadcastMessage(mensagemFinal);
+			Bukkit.getOnlinePlayers().stream().forEach(p -> p.spigot().sendMessage(mensagemFinal));
 			return;
 		}
-		
+
 		ArrayList<Player> recebedores = new ArrayList<Player>();
 		int chanelRadius = config.getInt(canal+".raio");
-		
+
 		Bukkit.getOnlinePlayers().stream().filter(p -> p.getLocation().getWorld().getName().equals(sender.getLocation().getWorld().getName())).filter(p -> p.getLocation().distance(sender.getLocation())<=chanelRadius).forEach(p -> recebedores.add(p));
-		
+
 		if (config.getBoolean(canal+".restrito")) {
 			final String permissão = config.getString(canal+".permissao");
-			recebedores.stream().filter(r -> r.hasPermission(permissão)).forEach(r -> r.sendMessage(mensagemFinal));
+			recebedores.stream().filter(r -> r.hasPermission(permissão)).forEach(r -> r.spigot().sendMessage(mensagemFinal));
 			return;
 		}
-		
-		recebedores.stream().forEach(r -> r.sendMessage(mensagemFinal));
+
+		recebedores.stream().forEach(r -> r.spigot().sendMessage(mensagemFinal));
 		return;
 	}
 }

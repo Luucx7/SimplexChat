@@ -57,8 +57,8 @@ public class Cores implements CommandExecutor {
         Matcher matcher = PATTTERN.matcher(hexColor);
         Matcher legacyMatch = LEGACY.matcher(hexColor);
         
-        if (SimplexChat.useRGB) {
-        	return matcher.matches();
+        if (SimplexChat.useRGB && matcher.matches()) {
+        	return true;
         }
         return legacyMatch.matches();
     }
