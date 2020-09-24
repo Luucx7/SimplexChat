@@ -48,7 +48,7 @@ public class Mensagem {
 				.replace("show_item=", "")
 				);
 
-		mensagemFinal = MineDown.parse(PlaceholderAPI.setPlaceholders(sender, formato));
+		mensagemFinal = MineDown.parse(PlaceholderAPI.setPlaceholders(sender, formato).replace("<br>", "\n"));
 	}
 
 	public void enviar() {
