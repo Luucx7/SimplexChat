@@ -5,6 +5,17 @@
 no_permission: '&cVocê não tem permissão!'
 
 #
+# Message sent to the sender saying the amount of players
+# who readed the player message.
+#
+amount_readed: '&5<amount> jogadores leram sua mensagem!'
+
+#
+# Message sent when no one readed the player message
+#
+no_one: '&cNinguém leu sua mensagem! :c'
+
+#
 # Sent when the player tries to do chat without any text
 #
 channel_usage_message: '&cUso: /{command} <mensagem>'

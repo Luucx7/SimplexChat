@@ -13,6 +13,7 @@ public class Canal implements Channel {
 	String formato;
 	boolean broadcast;
 	boolean restrito;
+	boolean actionbar;
 	String permissao;
 	int raio;
 	
@@ -32,6 +33,7 @@ public class Canal implements Channel {
 		this.raio = config.getInt(nome+".raio");
 		this.permissao = config.getString(nome+".permissao");
 		this.formato = ChatColor.translateAlternateColorCodes('&', config.getString(nome+".formato"));
+		this.actionbar = config.getBoolean(nome+".actionbar");
 	}
 	
 	@Override
@@ -92,5 +94,15 @@ public class Canal implements Channel {
 	@Override
 	public String getName() {
 		return nome;
+	}
+
+	@Override
+	public boolean useActionbar() {
+		return this.actionbar;
+	}
+
+	@Override
+	public void setActionbar(boolean actionbar) {
+		this.actionbar = actionbar;
 	}
 }

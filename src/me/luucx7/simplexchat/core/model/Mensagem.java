@@ -6,10 +6,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import me.luucx7.simplexchat.SimplexChat;
 import me.luucx7.simplexchat.core.api.Channel;
 import me.luucx7.simplexchat.core.minedown.MineDown;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
 
 public class Mensagem {
 
@@ -50,27 +53,29 @@ public class Mensagem {
 	}
 
 	public void enviar() {
-		if (canal.isBroadcast()) {
-			if (canal.isRestrict()) {
-				Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission(canal.getPermission())).forEach(p -> p.spigot().sendMessage(mensagemFinal));
-				return;
-			}
-			Bukkit.getOnlinePlayers().stream().forEach(p -> p.spigot().sendMessage(mensagemFinal));
-			return;
-		}
-
 		ArrayList<Player> recebedores = new ArrayList<Player>();
-		int chanelRadius = canal.getRadius();
-
-		Bukkit.getOnlinePlayers().stream().filter(p -> p.getLocation().getWorld().getName().equals(sender.getLocation().getWorld().getName())).filter(p -> p.getLocation().distance(sender.getLocation())<=chanelRadius).forEach(p -> recebedores.add(p));
-
-		if (canal.isRestrict()) {
-			final String permissão = canal.getPermission();
-			recebedores.stream().filter(r -> r.hasPermission(permissão)).forEach(r -> r.spigot().sendMessage(mensagemFinal));
-			return;
+		
+		if (canal.isBroadcast()) {
+			Bukkit.getOnlinePlayers().stream().forEach(p -> recebedores.add(p));
+		} else {
+			int chanelRadius = canal.getRadius();
+			Bukkit.getOnlinePlayers().stream().filter(p -> p.getLocation().getWorld().getName().equals(sender.getLocation().getWorld().getName())).filter(p -> p.getLocation().distance(sender.getLocation())<=chanelRadius).forEach(p -> recebedores.add(p));
 		}
-
-		recebedores.stream().forEach(r -> r.spigot().sendMessage(mensagemFinal));
+		
+		if (canal.isRestrict()) {
+			recebedores.stream().filter(r -> r.hasPermission(canal.getPermission())).forEach(r -> r.spigot().sendMessage(mensagemFinal));
+		} else {
+			recebedores.stream().forEach(r -> r.spigot().sendMessage(mensagemFinal));
+		}
+		
+		if (canal.useActionbar()) {
+			int quantia =  recebedores.size();
+			String actionMessage = quantia>1 ? 
+					ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("amount_readed").replace("<amount>", (quantia-1)+""))
+					: ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("no_one"));
+			
+		   sender.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(actionMessage));
+		}
 		return;
 	}
 }

@@ -13,6 +13,7 @@ public class Local implements Channel {
 	String formato;
 	boolean broadcast;
 	boolean restrito;
+	boolean actionbar;
 	final boolean habilitado;
 	String permissao;
 	int raio;
@@ -38,6 +39,7 @@ public class Local implements Channel {
 		this.raio = config.getInt("local.raio");
 		this.permissao = config.getString("local.permissao");
 		this.formato = ChatColor.translateAlternateColorCodes('&', config.getString("local.formato"));
+		this.actionbar = config.getBoolean("local.actionbar");
 	}
 
 	@Override
@@ -98,5 +100,15 @@ public class Local implements Channel {
 	@Override
 	public String getName() {
 		return nome;
+	}
+
+	@Override
+	public boolean useActionbar() {
+		return this.actionbar;
+	}
+
+	@Override
+	public void setActionbar(boolean actionbar) {
+		this.actionbar = actionbar;
 	}
 }

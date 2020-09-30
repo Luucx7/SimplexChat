@@ -35,4 +35,8 @@ public interface Channel {
 	public void setRadius(int radius);
 
 	public String getName();
+	
+	public boolean useActionbar();
+	
+	public void setActionbar(boolean actionbar);
 }

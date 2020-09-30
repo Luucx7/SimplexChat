@@ -29,6 +29,9 @@ local:
     raio: 200
     # Should this channel have a permission?
     restrito: false
+    # Send actionbar message with the amount of players 
+    # who readed the message
+    actionbar: true
     # The permission of this channel
     permissao: chat.global
 global:
@@ -37,6 +40,7 @@ global:
     broadcast: true
     raio: 0
     restrito: false
+    actionbar: false
     permissao: chat.global
 vip:
     formato: '&5[VIP] %luckperms_prefix% %clans_prefix%&5<player>&9&l> &5%chat_cor%<message>'
@@ -44,6 +48,7 @@ vip:
     broadcast: true
     raio: 0
     restrito: true
+    actionbar: false
     permissao: chat.vip
 construtor:
     formato: '&f[cb] %luckperms_prefix% &f<player>: <message>'
@@ -51,6 +56,7 @@ construtor:
     broadcast: true
     raio: 0
     restrito: true
+    actionbar: false
     permissao: chat.con
 helper:
     formato: '&6[helper] %luckperms_prefix% &6<player>: <message>'
@@ -58,6 +64,7 @@ helper:
     broadcast: true
     raio: 0
     restrito: true
+    actionbar: false
     permissao: chat.helper
 mod:
     formato: '&2[mod] %luckperms_prefix% &2<player>: <message>'
@@ -65,6 +72,7 @@ mod:
     broadcast: true
     raio: 0
     restrito: true
+    actionbar: false
     permissao: chat.mod
 admin:
     formato: '&c[Admin] %luckperms_prefix% &c<player>: <message>'
@@ -72,6 +80,7 @@ admin:
     broadcast: true
     raio: 0
     restrito: true
+    actionbar: false
     permissao: chat.admin
 devedor:
     formato: '&b[Devedor] %luckperms_prefix% &b<player>: <message>'
@@ -79,4 +88,5 @@ devedor:
     broadcast: true
     raio: 0
     restrito: true
+    actionbar: false
     permissao: chat.devedor
