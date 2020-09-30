@@ -1,4 +1,4 @@
-package me.luucx7.simplexchat.core;
+package me.luucx7.simplexchat.core.managers;
 
 import java.lang.reflect.Field;
 import java.util.List;

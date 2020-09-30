@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import me.luucx7.simplexchat.SimplexChat;
-import me.luucx7.simplexchat.core.CanaisManager;
+import me.luucx7.simplexchat.core.managers.CanaisManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class SimplexCmd implements CommandExecutor {

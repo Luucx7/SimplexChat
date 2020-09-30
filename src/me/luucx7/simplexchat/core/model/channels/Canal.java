@@ -1,14 +1,15 @@
-package me.luucx7.simplexchat.core.model;
+package me.luucx7.simplexchat.core.model.channels;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
 import me.luucx7.simplexchat.SimplexChat;
+import me.luucx7.simplexchat.core.api.Channel;
 import net.md_5.bungee.api.ChatColor;
 
-public class Canal {
+public class Canal implements Channel {
 	
 	final String nome;
-	String comando;
+	private String comando;
 	String formato;
 	boolean broadcast;
 	boolean restrito;
@@ -23,6 +24,7 @@ public class Canal {
 		load();
 	}
 	
+	@Override
 	public void load() {
 		this.comando = config.getString(nome+".comando");
 		this.broadcast = config.getBoolean(nome+".broadcast");
@@ -32,55 +34,63 @@ public class Canal {
 		this.formato = ChatColor.translateAlternateColorCodes('&', config.getString(nome+".formato"));
 	}
 	
-	public String getComando() {
+	@Override
+	public String getCommand() {
 		return comando;
 	}
 
-	public void setComando(String comando) {
-		this.comando = comando;
-	}
-
-	public String getFormato() {
+	@Override
+	public String getFormat() {
 		return formato;
 	}
 
-	public void setFormato(String formato) {
-		this.formato = formato;
+	@Override
+	public void setFormat(String format) {
+		this.formato = format;
 	}
 
+	@Override
 	public boolean isBroadcast() {
 		return broadcast;
 	}
 
+	@Override
 	public void setBroadcast(boolean broadcast) {
 		this.broadcast = broadcast;
 	}
 
-	public boolean isRestrito() {
+	@Override
+	public boolean isRestrict() {
 		return restrito;
 	}
 
-	public void setRestrito(boolean restrito) {
-		this.restrito = restrito;
+	@Override
+	public void setRestrict(boolean restrict) {
+		this.restrito = restrict;
 	}
 
-	public String getPermissao() {
+	@Override
+	public String getPermission() {
 		return permissao;
 	}
 
-	public void setPermissao(String permissao) {
-		this.permissao = permissao;
+	@Override
+	public void setPermission(String permission) {
+		this.permissao = permission;
 	}
 
-	public int getRaio() {
+	@Override
+	public int getRadius() {
 		return raio;
 	}
 
-	public void setRaio(int raio) {
-		this.raio = raio;
+	@Override
+	public void setRadius(int radius) {
+		this.raio = radius;
 	}
 
-	public String getNome() {
+	@Override
+	public String getName() {
 		return nome;
 	}
 }

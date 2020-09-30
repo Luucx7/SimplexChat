@@ -43,7 +43,7 @@ vip:
     comando: 'cv'
     broadcast: true
     raio: 0
-    restrito: false
+    restrito: true
     permissao: chat.vip
 construtor:
     formato: '&f[cb] %luckperms_prefix% &f<player>: <message>'

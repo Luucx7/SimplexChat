@@ -1,0 +1,19 @@
+#
+# If you server isn't 1.16, this change will take no effect
+# Disable if you want to remove RGB from /chatcolor
+# It will only allow vanilla color codes instead
+#
+enable_rgb: true
+#
+# Messages
+#
+# Console can't choose a color
+only_players: '&cDisponível apenas para jogadores!'
+# No argument provided on command
+no_arg: '&cDigite uma cor! /chatcor #<cor>'
+# Chat color removed
+removed: '&aVocê removeu sua cor de chat!'
+# Invalid HEX color
+invalid: '&cDigite uma cor hexadecimal válida! /chatcor #<cor>'
+# Chatcolor changed
+success: '&aA cor de seu chat foi alterada para %chat_color%esta.'

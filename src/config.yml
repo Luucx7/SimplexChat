@@ -15,25 +15,19 @@ channel_usage_message: '&cUso: /{command} <mensagem>'
 plugin_reloaded: '&aPlugin recarregado.'
 
 #
-# Related to the /chatcolor command
-# You can get the color in any plugin with PAPI
-# the placeholder is %chat_color% and returns empty 
-# when there is no color
+# Enable or disable plugin components here
+# Every module have its own configuration file
+# so you will not get distracted with useless or unrelated
+# things while setting up things.
 #
-colors:
+modules:
     #
-    # If you server isn't 1.16, this change will take no effect
-    # Disable if you want to remove RGB from /chatcolor
-    # It will use vanilla color codes instead
+    # Chat color module
+    # Players can choose their own chatcolor
+    # either normal (&c) or hexadecimal (#4DC3FF)
     #
-    enable_rgb: true
-    # Console can't choose a color
-    only_players: '&cDisponível apenas para jogadores!'
-    # No argument provided on command
-    no_arg: '&cDigite uma cor! /chatcor #<cor>'
-    # Chat color removed
-    removed: '&aVocê removeu sua cor de chat!'
-    # Invalid HEX color
-    invalid: '&cDigite uma cor hexadecimal válida! /chatcor #<cor>'
-    # Chatcolor changed
-    success: '&aA cor de seu chat foi alterada para %chat_color%esta.'
+    chatcolor: true
+    # Chat focus modules
+    # Players can choose a chat to default speak on or
+    # Optionally, force chat worlds can be set-up
+    focus: true

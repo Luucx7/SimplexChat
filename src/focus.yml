@@ -1,0 +1,5 @@
+#
+# Forced focus per world
+#
+worlds:
+  - dummy:global
