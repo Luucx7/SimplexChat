@@ -20,11 +20,13 @@ public class Mensagem {
 	String[] mensagem;
 	BaseComponent[] mensagemFinal;
 	Channel canal;
+	int quantia;
 
 	public Mensagem(Player sender, String[] mensagem, Channel canal) {
 		this.sender = sender;
 		this.mensagem = mensagem;
 		this.canal = canal;
+		this.quantia = 0;
 	}
 
 	public Mensagem preparar() {
@@ -56,10 +58,16 @@ public class Mensagem {
 		ArrayList<Player> recebedores = new ArrayList<Player>();
 		
 		if (canal.isBroadcast()) {
-			Bukkit.getOnlinePlayers().stream().forEach(p -> recebedores.add(p));
+			Bukkit.getOnlinePlayers().stream().forEach(p -> {
+				recebedores.add(p);
+				if (!p.hasPermission("chat.bypasscount")) quantia++;
+			});
 		} else {
 			int chanelRadius = canal.getRadius();
-			Bukkit.getOnlinePlayers().stream().filter(p -> p.getLocation().getWorld().getName().equals(sender.getLocation().getWorld().getName())).filter(p -> p.getLocation().distance(sender.getLocation())<=chanelRadius).forEach(p -> recebedores.add(p));
+			Bukkit.getOnlinePlayers().stream().filter(p -> p.getLocation().getWorld().getName().equals(sender.getLocation().getWorld().getName())).filter(p -> p.getLocation().distance(sender.getLocation())<=chanelRadius).forEach(p -> {
+				recebedores.add(p);
+				if (!p.hasPermission("chat.bypasscount")) quantia++;
+			});
 		}
 		
 		if (canal.isRestrict()) {
@@ -69,7 +77,6 @@ public class Mensagem {
 		}
 		
 		if (canal.useActionbar()) {
-			int quantia =  recebedores.size();
 			String actionMessage = quantia>1 ? 
 					ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("amount_readed").replace("<amount>", (quantia-1)+""))
 					: ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("no_one"));
