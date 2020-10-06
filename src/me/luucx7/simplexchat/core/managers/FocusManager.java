@@ -10,7 +10,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import me.luucx7.simplexchat.SimplexChat;
 import me.luucx7.simplexchat.cmds.Ch;
 import me.luucx7.simplexchat.core.api.Channel;
-import me.luucx7.simplexchat.listeners.ChatPlayerListener;
 
 public class FocusManager {
 	
@@ -21,8 +20,6 @@ public class FocusManager {
 	private static CommandManager manager;
 	
 	public static void prepare() {
-		SimplexChat.instance.getServer().getPluginManager().registerEvents(new ChatPlayerListener(), SimplexChat.instance);
-		
 		manager = new CommandManager("ch");
 		
 		List<String> aliases = new LinkedList<String>();

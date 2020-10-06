@@ -23,7 +23,6 @@ public class ChatPlayerListener implements Listener {
 		if (FocusManager.focusWorlds.containsKey(p.getWorld().getName())) {
 			Channel worldCh = FocusManager.focusWorlds.get(p.getWorld().getName());
 			player.setChannel(worldCh);
-			return;
 		}
 		JogadorManager.add(player);
 	}

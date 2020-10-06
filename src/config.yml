@@ -26,6 +26,22 @@ channel_usage_message: '&cUso: /{command} <mensagem>'
 plugin_reloaded: '&aPlugin recarregado.'
 
 #
+# Should all chat messages be sent to console?
+#
+log_to_console: true
+
+#
+# Message send to console on chat
+# Placeholders:
+# <channel> - Full channel name
+# <channelCmd> - Channel command
+# <player> - The player who sent the message
+# <message> - The message itself
+# Any PAPI placeholder
+#
+console_log: '[<channel>] %luckperms_prefix%<player>> <message>'
+
+#
 # Enable or disable plugin components here
 # Every module have its own configuration file
 # so you will not get distracted with useless or unrelated

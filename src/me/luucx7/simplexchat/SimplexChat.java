@@ -9,6 +9,7 @@ import me.luucx7.simplexchat.core.managers.CanaisManager;
 import me.luucx7.simplexchat.core.managers.CustomConfigs;
 import me.luucx7.simplexchat.core.managers.FocusManager;
 import me.luucx7.simplexchat.core.placeholders.ChatPlaceholder;
+import me.luucx7.simplexchat.listeners.ChatPlayerListener;
 import me.luucx7.simplexchat.listeners.LocalListener;
 
 public class SimplexChat extends JavaPlugin {
@@ -47,6 +48,7 @@ public class SimplexChat extends JavaPlugin {
 		}
 		
 		this.getServer().getPluginManager().registerEvents(new LocalListener(), this);
+		this.getServer().getPluginManager().registerEvents(new ChatPlayerListener(), this);
 	}
 	
 	public void onDisable() {
