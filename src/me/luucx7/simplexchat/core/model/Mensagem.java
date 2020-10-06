@@ -18,6 +18,7 @@ public class Mensagem {
 
 	final Player sender;
 	String[] mensagem;
+	String consoleMsg;
 	BaseComponent[] mensagemFinal;
 	Channel canal;
 	int quantia;
@@ -43,7 +44,10 @@ public class Mensagem {
 		} else {
 			playerMsg = ChatColor.stripColor(playerMsg).replace("", "")
 					.replace("show_entity=", "")
-					.replace("show_item=", "");
+					.replace("show_item=", "")
+					.replace("&", "")
+					.replace("color", "")
+					;
 		}
 
 		formato = formato.replace("<message>", playerMsg)
@@ -51,6 +55,17 @@ public class Mensagem {
 				);
 
 		mensagemFinal = MineDown.parse(PlaceholderAPI.setPlaceholders(sender, formato).replace("<br>", "\n"));
+		
+		if (SimplexChat.instance.getConfig().getBoolean("log_to_console")) {
+			consoleMsg = SimplexChat.instance.getConfig().getString("console_log");
+			consoleMsg = consoleMsg.replace("<channel>", canal.getName())
+			.replace("<channelCmd>", canal.getCommand())
+			.replace("<player>", sender.getName())
+			.replace("<message>", playerMsg)
+			;
+			
+			consoleMsg = PlaceholderAPI.setPlaceholders(sender, consoleMsg);
+		}
 		return this;
 	}
 
@@ -82,6 +97,9 @@ public class Mensagem {
 					: ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("no_one"));
 			
 		   sender.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(actionMessage));
+		}
+		if (SimplexChat.instance.getConfig().getBoolean("log_to_console")) {
+			Bukkit.getConsoleSender().sendMessage(consoleMsg);
 		}
 		return;
 	}
