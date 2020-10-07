@@ -30,7 +30,6 @@ import java.awt.Color;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -38,7 +37,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("unused")
 public class Util {
 
     private static final Pattern WRAP_PATTERN = Pattern.compile(" ", Pattern.LITERAL);
@@ -326,6 +324,20 @@ public class Util {
             return 0;
         }
         return Math.sqrt(Math.pow(c1.getRed() - c2.getRed(), 2) + Math.pow(c1.getGreen() - c2.getGreen(), 2) + Math.pow(c1.getBlue() - c2.getBlue(), 2));
+    }
+
+    /**
+     * Check if a certain class exists. See {@link Class#forName(String)}
+     * @param className The class name to check
+     * @return <code>true</code> if the class exists, <code>false</code> if not
+     */
+    public static boolean hasClass(String className) {
+        try {
+            Class.forName(className);
+            return true;
+        } catch (ClassNotFoundException classDoesntExist) {
+            return false;
+        }
     }
 
     /**
