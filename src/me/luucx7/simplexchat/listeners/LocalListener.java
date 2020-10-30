@@ -10,6 +10,7 @@ import me.luucx7.simplexchat.core.api.Channel;
 import me.luucx7.simplexchat.core.managers.CanaisManager;
 import me.luucx7.simplexchat.core.managers.JogadorManager;
 import me.luucx7.simplexchat.core.model.Mensagem;
+import net.md_5.bungee.api.ChatColor;
 
 public class LocalListener implements Listener {
 
@@ -27,6 +28,11 @@ public class LocalListener implements Listener {
 
 		if (SimplexChat.instance.getConfig().getBoolean("modules.focus")) {
 			canal = JogadorManager.get(ev.getPlayer()).getChannel();
+		}
+		
+		if (canal.isRestrict() && !ev.getPlayer().hasPermission(canal.getPermission())) {
+			ev.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("no_permission")));
+			return;
 		}
 		String[] gambiarraKKK = {ev.getMessage()};
 		Mensagem msg = new Mensagem(ev.getPlayer(), gambiarraKKK, canal);
