@@ -1,4 +1,4 @@
-package me.luucx7.simplexchat.cmds;
+package me.luucx7.simplexchat.commands;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

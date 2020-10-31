@@ -1,10 +1,10 @@
-name: SimplexChat
-version: 2.1.4
+name: ${project.name}
+version: ${project.version}
 api-version: 1.13
 main: me.luucx7.simplexchat.SimplexChat
 author: Luucx7
 depend: [PlaceholderAPI]
 commands:
     chatcor:
-        aliases: [chatcolor, corchat, colorchat]
+        aliases: [chatcolor, chatcor]
     simplexchat:

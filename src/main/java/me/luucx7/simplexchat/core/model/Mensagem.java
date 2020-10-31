@@ -2,13 +2,13 @@ package me.luucx7.simplexchat.core.model;
 
 import java.util.ArrayList;
 
+import de.themoep.minedown.MineDown;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.luucx7.simplexchat.SimplexChat;
 import me.luucx7.simplexchat.core.api.Channel;
-import me.luucx7.simplexchat.core.minedown.MineDown;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -28,6 +28,10 @@ public class Mensagem {
 		this.mensagem = mensagem;
 		this.canal = canal;
 		this.quantia = 0;
+	}
+
+	public Mensagem (Player sender, String message, Channel channel) {
+		this(sender, message.split(" "), channel);
 	}
 
 	public Mensagem preparar() {
@@ -54,7 +58,8 @@ public class Mensagem {
 				.replace("<player>", sender.getName()
 				);
 
-		mensagemFinal = MineDown.parse(PlaceholderAPI.setPlaceholders(sender, formato).replace("<br>", "\n"));
+		String replacedMessage = PlaceholderAPI.setPlaceholders(sender, formato).replace("<br>", "\n");
+		mensagemFinal = MineDown.parse(replacedMessage.trim().replaceAll(" +", " "));
 		
 		if (SimplexChat.instance.getConfig().getBoolean("log_to_console")) {
 			consoleMsg = SimplexChat.instance.getConfig().getString("console_log");

@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.luucx7.simplexchat.SimplexChat;
-import me.luucx7.simplexchat.cmds.Cores;
+import me.luucx7.simplexchat.commands.Cores;
 import me.luucx7.simplexchat.core.api.Channel;
 import me.luucx7.simplexchat.core.managers.JogadorManager;
 import net.md_5.bungee.api.ChatColor;
