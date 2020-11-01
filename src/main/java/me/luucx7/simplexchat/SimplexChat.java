@@ -1,10 +1,13 @@
 package me.luucx7.simplexchat;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.luucx7.simplexchat.cmds.Cores;
-import me.luucx7.simplexchat.cmds.SimplexCmd;
+import me.luucx7.simplexchat.commands.Cores;
+import me.luucx7.simplexchat.commands.SimplexCmd;
 import me.luucx7.simplexchat.core.managers.CanaisManager;
 import me.luucx7.simplexchat.core.managers.CustomConfigs;
 import me.luucx7.simplexchat.core.managers.FocusManager;
@@ -15,6 +18,7 @@ import me.luucx7.simplexchat.listeners.LocalListener;
 public class SimplexChat extends JavaPlugin {
 	
 	// literally this
+	@Getter @Setter(AccessLevel.PRIVATE)
 	public static SimplexChat instance;
 	
 	// Channels
@@ -27,7 +31,7 @@ public class SimplexChat extends JavaPlugin {
 	public static FileConfiguration fConfig;
 	
 	public void onEnable() {
-		instance = this;
+		setInstance(this);
 		saveDefaultConfig();
 			
 		cConfig = CustomConfigs.createCustomConfig("channels");

@@ -1,4 +1,4 @@
-package me.luucx7.simplexchat.cmds;
+package me.luucx7.simplexchat.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

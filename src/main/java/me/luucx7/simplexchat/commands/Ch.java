@@ -1,4 +1,4 @@
-package me.luucx7.simplexchat.cmds;
+package me.luucx7.simplexchat.commands;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class Ch extends Command {
 			return false;
 		}).findAny();
 
-		if (chOp.isEmpty() || chOp.get().isRestrict() && !s.hasPermission(chOp.get().getPermission())) {
+		if (!chOp.isPresent() || chOp.get().isRestrict() && !s.hasPermission(chOp.get().getPermission())) {
 			s.sendMessage("§cCanal inválido!");
 			return true;
 		}
@@ -50,8 +50,8 @@ public class Ch extends Command {
 	}
 
 	public List<String> tabComplete(CommandSender sender, String alias, String[] args) throws IllegalArgumentException {
-		LinkedList<String> playerChs = new LinkedList<String>();
-		LinkedList<String> result = new LinkedList<String>();
+		LinkedList<String> playerChs = new LinkedList<>();
+		LinkedList<String> result = new LinkedList<>();
 
 		CanaisManager.canaisCache.keySet().stream().filter(ch -> {
 			if (ch.isRestrict()) {
@@ -61,8 +61,8 @@ public class Ch extends Command {
 		}).forEach(ch -> playerChs.add(ch.getName()));
 
 		if (args.length==1) {
-			if (!(args[0]=="")) {
-				playerChs.stream().filter(s -> s.startsWith(args[0])).forEach(s -> result.add(s));
+			if (!(args[0].equals(""))) {
+				playerChs.stream().filter(s -> s.startsWith(args[0])).forEach(result::add);
 				return result;
 			}
 			return playerChs;

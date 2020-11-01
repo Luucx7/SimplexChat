@@ -8,7 +8,7 @@ import java.util.List;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import me.luucx7.simplexchat.SimplexChat;
-import me.luucx7.simplexchat.cmds.Ch;
+import me.luucx7.simplexchat.commands.Ch;
 import me.luucx7.simplexchat.core.api.Channel;
 
 public class FocusManager {
