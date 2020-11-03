@@ -38,7 +38,7 @@ public class FocusManager {
 			String canal = s.substring(doispontos+1);
 			
 			Optional<Channel> op = CanaisManager.canaisCache.keySet().stream().filter(k -> k.getName().equalsIgnoreCase(canal)).findAny();
-			if (op.isEmpty()) {
+			if (!op.isPresent()) {
 				return;
 			}
 			
