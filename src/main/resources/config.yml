@@ -54,6 +54,12 @@ modules:
     # either normal (&c) or hexadecimal (#4DC3FF)
     #
     chatcolor: true
+    #
+    # DiscordSRV integration
+    # if you would like to enable integration with DiscordSRV,
+    # enable this option.
+    #
+    discordsrv: true
     # Chat focus modules
     # Players can choose a chat to default speak on or
     # Optionally, force chat worlds can be set-up

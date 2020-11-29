@@ -19,6 +19,10 @@ local:
     # You can use any PAPI placeholder here
     # Message is replaced on <mensagem>
     formato: '&e[l] %luckperms_prefix% %clans_prefix%&e<player>&9&l> &e%chat_color%<message>'
+    # Channel command
+    # Command used to send a message in the channel
+    # Can also be used in the local channel.
+    comando: 'l'
     # Should this plugin handle game chat?
     # Disable if you only need channel commands or
     # whatever reason. Vanilla chat will not be blocked.

@@ -3,6 +3,7 @@ package me.luucx7.simplexchat;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,9 +30,15 @@ public class SimplexChat extends JavaPlugin {
 	
 	// Focus
 	public static FileConfiguration fConfig;
+
+	// DiscordSRV support
+	@Setter(AccessLevel.PRIVATE)
+	@Getter(AccessLevel.PUBLIC)
+	public static boolean isDiscordSRV;
 	
 	public void onEnable() {
 		setInstance(this);
+		setDiscordSRV(false);
 		saveDefaultConfig();
 			
 		cConfig = CustomConfigs.createCustomConfig("channels");
@@ -49,6 +56,10 @@ public class SimplexChat extends JavaPlugin {
 			colorsConfig = CustomConfigs.createCustomConfig("color");
 			
 			this.getCommand("chatcor").setExecutor(new Cores());
+		}
+
+		if (getConfig().getBoolean("modules.discordsrv") && Bukkit.getPluginManager().getPlugin("DiscordSRV")!=null && Bukkit.getPluginManager().getPlugin("DiscordSRV").isEnabled()) {
+			setDiscordSRV(true);
 		}
 		
 		this.getServer().getPluginManager().registerEvents(new LocalListener(), this);

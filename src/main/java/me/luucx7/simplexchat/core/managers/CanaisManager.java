@@ -1,6 +1,7 @@
 package me.luucx7.simplexchat.core.managers;
 
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -41,5 +42,11 @@ public class CanaisManager {
 		canaisCache.keySet().stream().forEach(canal -> {
 			canaisCache.get(canal).unregister(canal.getCommand());
 		});
+	}
+
+	public static Channel getChannel(String channelName) {
+		Optional<Channel> canalOP = canaisCache.keySet().stream().filter(key -> key.getName().equalsIgnoreCase(channelName)).findAny();
+		if (canalOP.isPresent()) return canalOP.get();
+		return null;
 	}
 }
