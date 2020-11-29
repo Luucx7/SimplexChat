@@ -3,7 +3,9 @@ version: ${project.version}
 api-version: 1.13
 main: me.luucx7.simplexchat.SimplexChat
 author: Luucx7
+website: github.com/Luucx7/simplexChat
 depend: [PlaceholderAPI]
+softdepend: [DiscordSRV]
 commands:
     chatcor:
         aliases: [chatcolor, chatcor]

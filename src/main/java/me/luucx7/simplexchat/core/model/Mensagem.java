@@ -3,6 +3,7 @@ package me.luucx7.simplexchat.core.model;
 import java.util.ArrayList;
 
 import de.themoep.minedown.MineDown;
+import github.scarsz.discordsrv.DiscordSRV;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -13,11 +14,13 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.springframework.util.StringUtils;
 
 public class Mensagem {
 
-	final Player sender;
+	Player sender;
 	String[] mensagem;
+	String mensagemString;
 	String consoleMsg;
 	BaseComponent[] mensagemFinal;
 	Channel canal;
@@ -36,17 +39,17 @@ public class Mensagem {
 
 	public Mensagem preparar() {
 		String formato = ChatColor.translateAlternateColorCodes('&', canal.getFormat());
-		String playerMsg = mensagem[0];
+		mensagemString = mensagem[0];
 		if (mensagem.length>1) {
 			for (int i = 1;i<mensagem.length;i++) {
-				playerMsg = playerMsg + " "+ mensagem[i];
+				mensagemString = mensagemString + " "+ mensagem[i];
 			}
 		}
 
-		if (sender.hasPermission("chat.colored")) {
-			playerMsg = ChatColor.translateAlternateColorCodes('&', playerMsg);
+		if (sender!=null) if (sender.hasPermission("chat.colored")) {
+			mensagemString = ChatColor.translateAlternateColorCodes('&', mensagemString);
 		} else {
-			playerMsg = ChatColor.stripColor(playerMsg).replace("", "")
+			mensagemString = ChatColor.stripColor(mensagemString).replace("", "")
 					.replace("show_entity=", "")
 					.replace("show_item=", "")
 					.replace("&", "")
@@ -54,19 +57,18 @@ public class Mensagem {
 					;
 		}
 
-		formato = formato.replace("<message>", playerMsg)
-				.replace("<player>", sender.getName()
-				);
+		formato = formato.replace("<message>", mensagemString);
+		if (sender!=null) formato = formato.replace("<player>", sender.getName());
 
-		String replacedMessage = PlaceholderAPI.setPlaceholders(sender, formato).replace("<br>", "\n");
+				String replacedMessage = PlaceholderAPI.setPlaceholders(sender, formato).replace("<br>", "\n");
 		mensagemFinal = MineDown.parse(replacedMessage.trim().replaceAll(" +", " "));
 		
 		if (SimplexChat.instance.getConfig().getBoolean("log_to_console")) {
 			consoleMsg = SimplexChat.instance.getConfig().getString("console_log");
 			consoleMsg = consoleMsg.replace("<channel>", canal.getName())
 			.replace("<channelCmd>", canal.getCommand())
-			.replace("<player>", sender.getName())
-			.replace("<message>", playerMsg)
+			.replace("<player>", sender!=null ? sender.getName() : "Discord")
+			.replace("<message>", mensagemString)
 			;
 			
 			consoleMsg = PlaceholderAPI.setPlaceholders(sender, consoleMsg);
@@ -105,6 +107,12 @@ public class Mensagem {
 		}
 		if (SimplexChat.instance.getConfig().getBoolean("log_to_console")) {
 			Bukkit.getConsoleSender().sendMessage(consoleMsg);
+		}
+
+		if (SimplexChat.isDiscordSRV()) {
+			if (DiscordSRV.getPlugin().getDestinationTextChannelForGameChannelName(canal.getName()) == null) return;
+			if (StringUtils.isEmpty(mensagem.toString()));
+			DiscordSRV.getPlugin().processChatMessage(sender, mensagemString, canal.getName(), false);
 		}
 		return;
 	}

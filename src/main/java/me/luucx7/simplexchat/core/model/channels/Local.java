@@ -40,6 +40,8 @@ public class Local implements Channel {
 		this.permissao = config.getString("local.permissao");
 		this.formato = ChatColor.translateAlternateColorCodes('&', config.getString("local.formato"));
 		this.actionbar = config.getBoolean("local.actionbar");
+
+		if (config.isSet("local.comando")) comando = config.getString("local.comando");
 	}
 
 	@Override
