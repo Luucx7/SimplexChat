@@ -8,7 +8,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import me.luucx7.simplexchat.SimplexChat;
 import me.luucx7.simplexchat.core.api.Channel;
-import me.luucx7.simplexchat.core.managers.CanaisManager;
+import me.luucx7.simplexchat.core.managers.ChannelsManager;
 import me.luucx7.simplexchat.core.managers.JogadorManager;
 import me.luucx7.simplexchat.core.model.Mensagem;
 
@@ -19,9 +19,9 @@ public class LocalListener implements Listener {
 		if (ev.isCancelled()) {
 			return;
 		}
-		Channel canal = CanaisManager.local;
+		Channel canal = ChannelsManager.local;
 		
-		if (!CanaisManager.local.isHabilitado()) {
+		if (!ChannelsManager.local.isEnabled()) {
 			return;
 		}
 		ev.setCancelled(true);

@@ -9,7 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.luucx7.simplexchat.commands.Cores;
 import me.luucx7.simplexchat.commands.SimplexCmd;
-import me.luucx7.simplexchat.core.managers.CanaisManager;
+import me.luucx7.simplexchat.core.managers.ChannelsManager;
 import me.luucx7.simplexchat.core.managers.CustomConfigs;
 import me.luucx7.simplexchat.core.managers.FocusManager;
 import me.luucx7.simplexchat.core.placeholders.ChatPlaceholder;
@@ -46,7 +46,7 @@ public class SimplexChat extends JavaPlugin {
 		new ChatPlaceholder(this).register();
 		
 		this.getCommand("simplexchat").setExecutor(new SimplexCmd());
-		CanaisManager.load();
+		ChannelsManager.load();
 		
 		if (getConfig().getBoolean("modules.focus")) {
 			fConfig = CustomConfigs.createCustomConfig("focus");
@@ -67,7 +67,7 @@ public class SimplexChat extends JavaPlugin {
 	}
 	
 	public void onDisable() {
-		CanaisManager.disable();
+		ChannelsManager.disable();
 		FocusManager.unload();
 	}
 }

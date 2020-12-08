@@ -7,22 +7,22 @@ public interface ChatPlayer {
 	 * 
 	 * @return String
 	 */
-	public String getName();
+	String getName();
 	
 	/**
 	 * Gets the ChatPlayer choosen channel.
 	 * 
 	 * @return Channel or null if Focus is disabled
 	 */
-	public Channel getChannel();
+	Channel getChannel();
 	
 	/**
 	 * Set the player focused channel.
 	 * This is ignored if Focus is disabled.
 	 * 
-	 * @param Channel
+	 * @param channel
 	 */
-	public void setChannel(Channel channel);
+	void setChannel(Channel channel);
 	
 	/**
 	 * Gets the player choosen color as String, needs to be parsed since
@@ -30,13 +30,13 @@ public interface ChatPlayer {
 	 * 
 	 * @return String
 	 */
-	public String getColor();
+	String getColor();
 	
 	/**
 	 * Set the player color string. Needs to be parsed since
 	 * it can be hexadecimal (1.16+) or vanilla ones.
 	 * 
-	 * @param String refering to the color
+	 * @param color of the player chat
 	 */
-	public void setColor(String color);
+	void setColor(String color);
 }

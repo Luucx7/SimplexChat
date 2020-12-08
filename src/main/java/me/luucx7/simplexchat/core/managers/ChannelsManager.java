@@ -3,15 +3,16 @@ package me.luucx7.simplexchat.core.managers;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+import me.luucx7.simplexchat.core.api.Local;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import me.luucx7.simplexchat.SimplexChat;
 import me.luucx7.simplexchat.commands.ChannelCommand;
 import me.luucx7.simplexchat.core.api.Channel;
 import me.luucx7.simplexchat.core.model.channels.ChannelImpl;
-import me.luucx7.simplexchat.core.model.channels.Local;
+import me.luucx7.simplexchat.core.model.channels.LocalImpl;
 
-public class CanaisManager {
+public class ChannelsManager {
 	
 	public static LinkedHashMap<Channel, CommandManager> canaisCache = new LinkedHashMap<Channel, CommandManager>();
 	public static Local local;
@@ -21,7 +22,7 @@ public class CanaisManager {
 	public static void load() {
 		
 		// Loads the local channel
-		local = new Local();
+		local = new LocalImpl();
 		CommandManager localCmd = new CommandManager(local.getCommand());
 		localCmd.unregister(local.getCommand());
 		localCmd.register(new ChannelCommand(local.getCommand()));

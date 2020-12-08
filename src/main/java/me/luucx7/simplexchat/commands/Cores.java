@@ -3,6 +3,7 @@ package me.luucx7.simplexchat.commands;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import me.luucx7.simplexchat.core.api.ChatPlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,7 +26,7 @@ public class Cores implements CommandExecutor {
 			s.sendMessage(getString("only_players"));
 			return true;
 		}
-		if (!s.hasPermission("chat.setcor")) {
+		if (!s.hasPermission("chat.setcolor")) {
 			s.sendMessage(getString("no_permission"));
 			return true;
 		}
@@ -34,7 +35,7 @@ public class Cores implements CommandExecutor {
 			return true;
 		}
 		Player player = (Player) s;
-		Jogador jog = JogadorManager.get(player);
+		ChatPlayer jog = JogadorManager.get(player);
 		
         if (args[0].equalsIgnoreCase("limpar") || args[0].equalsIgnoreCase("clear")) {
             jog.setColor("");

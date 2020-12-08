@@ -2,7 +2,7 @@ package me.luucx7.simplexchat.core.model;
 
 import me.luucx7.simplexchat.core.api.Channel;
 import me.luucx7.simplexchat.core.api.ChatPlayer;
-import me.luucx7.simplexchat.core.managers.CanaisManager;
+import me.luucx7.simplexchat.core.managers.ChannelsManager;
 
 public class Jogador implements ChatPlayer {
 	
@@ -13,7 +13,7 @@ public class Jogador implements ChatPlayer {
 	public Jogador(String name) {
 		this.name = name;
 		this.color = "";
-		this.canal = CanaisManager.local;
+		this.canal = ChannelsManager.local;
 	}
 	public Jogador(String name, Channel canal) {
 		this.name = name;
@@ -23,7 +23,7 @@ public class Jogador implements ChatPlayer {
 	public Jogador(String name, String color) {
 		this.name = name;
 		this.color = color;
-		this.canal = CanaisManager.local;
+		this.canal = ChannelsManager.local;
 	}
 	public Jogador(String name, Channel channel, String color) {
 		this.name = name;

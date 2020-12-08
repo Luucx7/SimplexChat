@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import de.themoep.minedown.MineDown;
 import github.scarsz.discordsrv.DiscordSRV;
+import me.luucx7.simplexchat.core.nms.ActionBar;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -102,8 +103,12 @@ public class Mensagem {
 			String actionMessage = quantia>1 ? 
 					ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("amount_readed").replace("<amount>", (quantia-1)+""))
 					: ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("no_one"));
-			
-		   sender.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(actionMessage));
+
+			if (SimplexChat.getInstance().getServer().getVersion().contains("1.8")) {
+				ActionBar.sendActionBar(sender, actionMessage);
+			} else {
+				sender.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(actionMessage));
+			}
 		}
 		if (SimplexChat.instance.getConfig().getBoolean("log_to_console")) {
 			Bukkit.getConsoleSender().sendMessage(consoleMsg);

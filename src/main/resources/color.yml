@@ -8,12 +8,12 @@ enable_rgb: true
 # Messages
 #
 # Console can't choose a color
-only_players: '&cDisponível apenas para jogadores!'
+only_players: '&cAvaliable only for players!'
 # No argument provided on command
-no_arg: '&cDigite uma cor! /chatcor #<cor>'
+no_arg: '&cType an color! /chatcolor #<color>'
 # Chat color removed
-removed: '&aVocê removeu sua cor de chat!'
+removed: '&aYour chat color was removed!'
 # Invalid HEX color
-invalid: '&cDigite uma cor hexadecimal válida! /chatcor #<cor>'
+invalid: '&cType an valid hex color! /chatcolor #<color>'
 # Chatcolor changed
-success: '&aA cor de seu chat foi alterada para %chat_color%esta.'
+success: '&aThe color of your chat was changed to %chat_color%this.'

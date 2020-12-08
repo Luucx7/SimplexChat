@@ -1,5 +1,6 @@
 package me.luucx7.simplexchat.listeners;
 
+import me.luucx7.simplexchat.core.api.ChatPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,8 +18,8 @@ public class ChatPlayerListener implements Listener {
 	@EventHandler
 	public void join(PlayerJoinEvent ev) {
 		Player p = ev.getPlayer();
-		
-		Jogador player = JogadorManager.get(p);
+
+		ChatPlayer player = JogadorManager.get(p);
 		
 		if (FocusManager.focusWorlds.containsKey(p.getWorld().getName())) {
 			Channel worldCh = FocusManager.focusWorlds.get(p.getWorld().getName());

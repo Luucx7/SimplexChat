@@ -1,47 +1,48 @@
 package me.luucx7.simplexchat.core.model.channels;
 
+import me.luucx7.simplexchat.core.api.Local;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import me.luucx7.simplexchat.SimplexChat;
 import me.luucx7.simplexchat.core.api.Channel;
 import net.md_5.bungee.api.ChatColor;
 
-public class Local implements Channel {
+public class LocalImpl implements Local {
 
 	final String nome = "local";
 	String comando = "l";
 	String formato;
-	boolean broadcast;
-	boolean restrito;
-	boolean actionbar;
+	boolean broadcast = true;
+	boolean restrito = false;
+	boolean actionbar = false;
 	final boolean habilitado;
 	String permissao;
 	int raio;
 	
 	public static FileConfiguration config = SimplexChat.cConfig;
 	
-	public Local() {
-		this.habilitado = config.getBoolean("local.habilitar");
+	public LocalImpl() {
+		this.habilitado = config.getBoolean("local.enable");
 		
 		if (habilitado) {
 			load();
 		}
 	}
 	
-	public boolean isHabilitado() {
+	public boolean isEnabled() {
 		return this.habilitado;
 	}
 	
 	@Override
 	public void load() {
-		this.broadcast = config.getBoolean("local.broadcast");
-		this.restrito = config.getBoolean("local.restrito");
-		this.raio = config.getInt("local.raio");
-		this.permissao = config.getString("local.permissao");
-		this.formato = ChatColor.translateAlternateColorCodes('&', config.getString("local.formato"));
-		this.actionbar = config.getBoolean("local.actionbar");
+		if (config.isSet("local.broadcast")) this.broadcast = config.getBoolean("local.broadcast");
+		if (config.isSet("local.restrict")) this.restrito = config.getBoolean("local.restrict");
+		this.raio = config.getInt("local.radius");
+		this.permissao = config.getString("local.permission");
+		this.formato = ChatColor.translateAlternateColorCodes('&', config.getString("local.format"));
+		if (config.isSet("local.actionbar")) this.actionbar = config.getBoolean("local.actionbar");
 
-		if (config.isSet("local.comando")) comando = config.getString("local.comando");
+		if (config.isSet("local.command")) comando = config.getString("local.command");
 	}
 
 	@Override

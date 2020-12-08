@@ -2,28 +2,52 @@
 # Message sent when the player doesnt have permission for
 # a channel or any command of the plugin.
 #
-no_permission: '&cVocê não tem permissão!'
+no_permission: '&cYou do not have permission!'
 
 #
 # Message sent to the sender saying the amount of players
 # who readed the player message.
 #
-amount_readed: '&5<amount> jogadores leram sua mensagem!'
+amount_readed: '&5<amount> players saw your message!'
 
 #
 # Message sent when no one readed the player message
 #
-no_one: '&cNinguém leu sua mensagem! :c'
+no_one: '&cNo one readed your message! :c'
+
+#
+# When console or any non-player tries to execute a command they shouldn't
+#
+players_only: '&cOnly players can execute this command!'
+
+#
+# Sent when player incorrectly uses /channel
+#
+channel_command_usage: '&cUsage: /ch <channel>'
 
 #
 # Sent when the player tries to do chat without any text
 #
-channel_usage_message: '&cUso: /{command} <mensagem>'
+channel_usage_message: '&cUsage: /{command} <message>'
+
+#
+# Message sent when the player changes the main channel with /ch
+# Placeholders:
+# <channelName> - Full name of the channel
+# <channelCommand> - Command of the channel
+#
+channel_changed: '&aChannel changed to <channelName> - <channelCommand>'
+
+#
+# Sent when the player do not have permission to use a channel or somehow the channel do not exist
+#
+invalid_channel: '&cInvalid channel!'
 
 #
 # Text sent when plugin is reloaded
+#     NOT IMPLEMENTED YET!
 #
-plugin_reloaded: '&aPlugin recarregado.'
+plugin_reloaded: '&aPlugin reloaded.'
 
 #
 # Should all chat messages be sent to console?
@@ -31,7 +55,7 @@ plugin_reloaded: '&aPlugin recarregado.'
 log_to_console: true
 
 #
-# Message send to console on chat
+# Message send to console when someone uses chat
 # Placeholders:
 # <channel> - Full channel name
 # <channelCmd> - Channel command
@@ -45,7 +69,7 @@ console_log: '[<channel>] %luckperms_prefix%<player>> <message>'
 # Enable or disable plugin components here
 # Every module have its own configuration file
 # so you will not get distracted with useless or unrelated
-# things while setting up things.
+# things while setting up the plugin.
 #
 modules:
     #
@@ -58,9 +82,13 @@ modules:
     # DiscordSRV integration
     # if you would like to enable integration with DiscordSRV,
     # enable this option.
+    # The plugin will send chat messages from channels as configured in DiscordSRV.
+    # but it will NOT receive messages from Discord and send to the chat.
     #
     discordsrv: true
+    #
     # Chat focus modules
     # Players can choose a chat to default speak on or
     # Optionally, force chat worlds can be set-up
+    #
     focus: true

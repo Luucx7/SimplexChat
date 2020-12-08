@@ -4,12 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import me.luucx7.simplexchat.SimplexChat;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.luucx7.simplexchat.core.api.Channel;
-import me.luucx7.simplexchat.core.managers.CanaisManager;
+import me.luucx7.simplexchat.core.managers.ChannelsManager;
 import me.luucx7.simplexchat.core.managers.JogadorManager;
 
 public class Ch extends Command {
@@ -21,14 +23,14 @@ public class Ch extends Command {
 	@Override
 	public boolean execute(CommandSender s, String c, String[] args) {
 		if (!(s instanceof Player)) {
-			s.sendMessage("§cApenas jogadores podem executar este comando!");
+			s.sendMessage(getMessage("players_only"));
 			return true;
 		}
 		if (args.length==0) {
-			s.sendMessage("§cUso: /ch <canal>");
+			s.sendMessage(getMessage("channel_command_usage"));
 			return true;
 		}
-		Optional<Channel> chOp = CanaisManager.canaisCache.keySet().stream().filter(k -> {
+		Optional<Channel> chOp = ChannelsManager.canaisCache.keySet().stream().filter(k -> {
 			if (k.getName().equalsIgnoreCase(args[0]) || k.getCommand().equalsIgnoreCase(args[0])) {
 				return true;
 			}
@@ -36,7 +38,7 @@ public class Ch extends Command {
 		}).findAny();
 
 		if (!chOp.isPresent() || chOp.get().isRestrict() && !s.hasPermission(chOp.get().getPermission())) {
-			s.sendMessage("§cCanal inválido!");
+			s.sendMessage(getMessage("invalid_channel"));
 			return true;
 		}
 
@@ -45,7 +47,7 @@ public class Ch extends Command {
 
 		JogadorManager.get(p).setChannel(ch);
 
-		s.sendMessage("§aCanal alterado para "+ch.getName()+" - /"+ch.getCommand());
+		s.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.getInstance().getConfig().getString("channel_changed").replace("<channelName>", ch.getName()).replace("<channelCommand>", ch.getCommand())));
 		return false;
 	}
 
@@ -53,7 +55,7 @@ public class Ch extends Command {
 		LinkedList<String> playerChs = new LinkedList<>();
 		LinkedList<String> result = new LinkedList<>();
 
-		CanaisManager.canaisCache.keySet().stream().filter(ch -> {
+		ChannelsManager.canaisCache.keySet().stream().filter(ch -> {
 			if (ch.isRestrict()) {
 				return sender.hasPermission(ch.getPermission());
 			}
@@ -68,5 +70,9 @@ public class Ch extends Command {
 			return playerChs;
 		}
 		return null;
+	}
+
+	public static String getMessage(String path) {
+		return ChatColor.translateAlternateColorCodes('&', SimplexChat.getInstance().getConfig().getString(path));
 	}
 }

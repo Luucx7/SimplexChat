@@ -6,18 +6,19 @@
 
     <groupId>me.luucx7.simplexchat</groupId>
     <artifactId>SimplexChat</artifactId>
-    <version>2.3.0</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>SimplexChat</name>
 
-    <description>Um plugin de chat para o craftlife</description>
+    <description>SimplexChat is a simple and extremely configurable chat plugin that uses MineDown framework (hover, clickable messages and more) throughout the plugin</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <build>
+        <finalName>SimplexChat</finalName>
         <defaultGoal>clean install</defaultGoal>
         <plugins>
             <plugin>

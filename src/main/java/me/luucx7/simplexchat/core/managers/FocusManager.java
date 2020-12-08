@@ -27,7 +27,7 @@ public class FocusManager {
 		aliases.add("channel");
 		aliases.add("canal");
 		aliases.add("canais");
-		manager.setUsage("§cUso: /ch <canal>");
+		manager.setUsage(Ch.getMessage("channel_command_usage"));
 		manager.setAliases(aliases);
 		manager.unregister("ch");
 		manager.register(new Ch("ch"));
@@ -37,7 +37,7 @@ public class FocusManager {
 			String world = s.substring(0, doispontos);
 			String canal = s.substring(doispontos+1);
 			
-			Optional<Channel> op = CanaisManager.canaisCache.keySet().stream().filter(k -> k.getName().equalsIgnoreCase(canal)).findAny();
+			Optional<Channel> op = ChannelsManager.canaisCache.keySet().stream().filter(k -> k.getName().equalsIgnoreCase(canal)).findAny();
 			if (!op.isPresent()) {
 				return;
 			}

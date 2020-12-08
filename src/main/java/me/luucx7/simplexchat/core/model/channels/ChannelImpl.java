@@ -36,12 +36,12 @@ public class ChannelImpl implements Channel {
 	
 	@Override
 	public void load() {
-		this.command = config.getString(name + ".comando");
+		this.command = config.getString(name + ".command");
 		this.broadcast = config.getBoolean(name + ".broadcast");
-		this.restrict = config.getBoolean(name + ".restrito");
-		this.radius = config.getInt(name + ".raio");
-		this.permission = config.getString(name + ".permissao");
-		this.format = ChatColor.translateAlternateColorCodes('&', config.getString(name + ".formato"));
+		this.restrict = config.getBoolean(name + ".restrict");
+		this.radius = config.getInt(name + ".radius");
+		this.permission = config.getString(name + ".permission");
+		this.format = ChatColor.translateAlternateColorCodes('&', config.getString(name + ".format"));
 		this.actionbar = config.getBoolean(name + ".actionbar");
 	}
 

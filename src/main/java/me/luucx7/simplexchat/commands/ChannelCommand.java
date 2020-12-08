@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import me.luucx7.simplexchat.SimplexChat;
 import me.luucx7.simplexchat.core.api.Channel;
-import me.luucx7.simplexchat.core.managers.CanaisManager;
+import me.luucx7.simplexchat.core.managers.ChannelsManager;
 import me.luucx7.simplexchat.core.model.Mensagem;
 import net.md_5.bungee.api.ChatColor;
 
@@ -22,11 +22,11 @@ public class ChannelCommand extends Command {
 	@Override
 	public boolean execute(CommandSender sender, String comando, String[] args) {
 		if (!(sender instanceof Player)) {
-			sender.sendMessage("§cOnly players can use this command!");
+			sender.sendMessage(Ch.getMessage("players_only"));
 			return true;
 		}
 		
-		Optional<Channel> opChannel = CanaisManager.canaisCache.keySet().stream().filter(canal -> canal.getCommand().equalsIgnoreCase(comando)).findFirst();
+		Optional<Channel> opChannel = ChannelsManager.canaisCache.keySet().stream().filter(canal -> canal.getCommand().equalsIgnoreCase(comando)).findFirst();
 		if (!opChannel.isPresent()) {
 			return true;
 		}
