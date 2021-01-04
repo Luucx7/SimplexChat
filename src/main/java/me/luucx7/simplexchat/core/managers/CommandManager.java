@@ -28,7 +28,9 @@ public class CommandManager {
        
         this.cmdMap = (CommandMap) bukkitCommandMap.get(Bukkit.getServer());
        
-        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException idontcare) {}
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
+            Bukkit.getConsoleSender().sendMessage("§cError while registering command "+cmdName);
+        }
        
     }
    

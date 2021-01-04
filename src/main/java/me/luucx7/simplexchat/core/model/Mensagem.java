@@ -116,7 +116,7 @@ public class Mensagem {
 
 		if (SimplexChat.isDiscordSRV()) {
 			if (DiscordSRV.getPlugin().getDestinationTextChannelForGameChannelName(canal.getName()) == null) return;
-			if (StringUtils.isEmpty(mensagem.toString()));
+			if (StringUtils.isEmpty(mensagem.toString())) return;
 			DiscordSRV.getPlugin().processChatMessage(sender, mensagemString, canal.getName(), false);
 		}
 		return;

@@ -1,7 +1,7 @@
 #       SimplexChat by Luucx7 @ SagaciousDev
 #
 #            Channels configuration
-# 
+#
 # - > Keys can't be the same.
 # - > Full support for PlaceholdersAPI on channel format
 # - > Full support for MineDown everywhere
@@ -34,7 +34,7 @@ local:
     radius: 200
     # Should this channel have a permission?
     restrict: false
-    # Send actionbar message with the amount of players 
+    # Send actionbar message with the amount of players
     # who readed the message
     actionbar: true
     # The permission of this channel
