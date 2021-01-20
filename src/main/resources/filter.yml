@@ -17,4 +17,4 @@ remove:
 # Everytime you tipe "barney", the text will be replaced with "swarley"
 #
 replace:
-  - 'hello:world'
+  - 'barney:swarley'
