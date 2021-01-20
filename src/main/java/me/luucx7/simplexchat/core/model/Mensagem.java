@@ -58,10 +58,24 @@ public class Mensagem {
 					;
 		}
 
+		if (SimplexChat.useFilter && !sender.hasPermission("chat.filter.bypass")) {
+
+			SimplexChat.filterConfig.getStringList("remove").stream().forEach(s -> {
+				mensagemString = mensagemString.replace(s, "");
+			});
+
+			SimplexChat.filterConfig.getStringList("replace").stream().forEach(s -> {
+				String toReplace = s.substring(0, s.indexOf(':'));
+				String replacer = s.substring(s.indexOf(':')+1);
+
+				mensagemString = mensagemString.replace(toReplace, replacer);
+			});
+		}
+
 		formato = formato.replace("<message>", mensagemString);
 		if (sender!=null) formato = formato.replace("<player>", sender.getName());
 
-				String replacedMessage = PlaceholderAPI.setPlaceholders(sender, formato).replace("<br>", "\n");
+		String replacedMessage = PlaceholderAPI.setPlaceholders(sender, formato).replace("<br>", "\n");
 		mensagemFinal = MineDown.parse(replacedMessage.trim().replaceAll(" +", " "));
 		
 		if (SimplexChat.instance.getConfig().getBoolean("log_to_console")) {

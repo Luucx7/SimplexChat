@@ -31,6 +31,10 @@ public class SimplexChat extends JavaPlugin {
 	// Focus
 	public static FileConfiguration fConfig;
 
+	// Filter
+	public static FileConfiguration filterConfig;
+	public static boolean useFilter = false;
+
 	// DiscordSRV support
 	@Setter(AccessLevel.PRIVATE)
 	@Getter(AccessLevel.PUBLIC)
@@ -54,8 +58,12 @@ public class SimplexChat extends JavaPlugin {
 		}
 		if (getConfig().getBoolean("modules.chatcolor")) {
 			colorsConfig = CustomConfigs.createCustomConfig("color");
-			
+
 			this.getCommand("chatcor").setExecutor(new Cores());
+		}
+		if (getConfig().getBoolean("modules.filter")) {
+			useFilter = true;
+			filterConfig = CustomConfigs.createCustomConfig("filter");
 		}
 
 		if (getConfig().getBoolean("modules.discordsrv") && Bukkit.getPluginManager().getPlugin("DiscordSRV")!=null && Bukkit.getPluginManager().getPlugin("DiscordSRV").isEnabled()) {

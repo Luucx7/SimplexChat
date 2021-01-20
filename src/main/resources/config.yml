@@ -92,3 +92,9 @@ modules:
     # Optionally, force chat worlds can be set-up
     #
     focus: true
+    #
+    # Chat filter and replacer module
+    # Messages containing specific pre-defined words will be replaced
+    # Disable if you don't need this
+    #
+    filter: true

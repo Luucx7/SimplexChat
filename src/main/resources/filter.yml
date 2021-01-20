@@ -1,0 +1,20 @@
+#
+# Chat filter module
+# Replacement is NOT case sensitive!
+#
+
+#
+# Texts under this string list will be completely removed.
+#
+remove:
+  - 'bitch'
+
+#
+# The text before the : will be replaced withe everything after the :
+# Example:
+# - 'barney:swarley'
+#
+# Everytime you tipe "barney", the text will be replaced with "swarley"
+#
+replace:
+  - 'hello:world'
