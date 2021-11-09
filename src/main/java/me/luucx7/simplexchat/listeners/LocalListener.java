@@ -35,6 +35,6 @@ public class LocalListener implements Listener {
 		}
 
 		Mensagem msg = new Mensagem(ev.getPlayer(), ev.getMessage(), canal);
-		msg.preparar().enviar();
+		msg.validar().preparar().enviar();
 	}
 }

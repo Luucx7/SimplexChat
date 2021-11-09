@@ -66,6 +66,21 @@ log_to_console: true
 console_log: '[<channel>] %luckperms_prefix%<player>> <message>'
 
 #
+# Spam limit in caracter
+#
+spam_limit: 10
+
+#
+# Message canceled because contain spam
+#
+message_canceled_spam: "&aMessage canceled because contain spam."
+
+#
+# Message canceled because it has already been sent
+#
+message_canceled_flood: "&aYou cannot send a message like the previous message."
+
+#
 # Enable or disable plugin components here
 # Every module have its own configuration file
 # so you will not get distracted with useless or unrelated
