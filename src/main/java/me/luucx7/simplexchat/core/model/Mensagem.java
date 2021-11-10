@@ -27,7 +27,7 @@ public class Mensagem {
 	BaseComponent[] mensagemFinal;
 	Channel canal;
 	int quantia;
-	boolean valid = true;
+	boolean isValid;
 
 	public Mensagem(Player sender, String[] mensagem, Channel canal) {
 		this.sender = sender;
@@ -41,31 +41,33 @@ public class Mensagem {
 	}
 
 	public Mensagem validar() {
-		if (sender.hasPermission("chat.filter.bypass") || !SimplexChat.useFilter) {
-			this.valid = true;
+		if (sender.hasPermission("chat.filter.bypass")) {
+			this.isValid = true;
 			return this;
 		}
 
 		String msg = String.join(" ", mensagem);
 
-		if (MessageManager.isSpam(mensagem)) {
+		if (SimplexChat.instance.getConfig().getBoolean("modules.prevent_spam") && MessageManager.isSpam(mensagem)) {
 			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("message_canceled_spam")));
 
-			this.valid = false;
 			return this;
 		}
 
-		if (MessageManager.isFlood((Player) sender, msg)) {
-			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("message_canceled_flood")));
+		if (SimplexChat.instance.getConfig().getBoolean("modules.prevent_flood")) {
+			if (MessageManager.isFlood((Player) sender, msg)) {
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("message_canceled_flood")));
 
-			this.valid = false;
-			return this;
+				return this;
+			}
+			else MessageManager.setLastMessage(sender, msg);
 		}
 
-		MessageManager.setLastMessage((Player) sender, msg);
-		mensagem = MessageManager.formatTitle(mensagem);
+		if (!SimplexChat.instance.getConfig().getBoolean("modules.allow_uppercase")) {
+			mensagem = MessageManager.formatTitle(mensagem);
+		}
 
-		this.valid = true;
+		this.isValid = true;
 		return this;
 	}
 
@@ -123,7 +125,7 @@ public class Mensagem {
 	}
 
 	public void enviar() {
-		if (!valid) return;
+		if (!isValid) return;
 
 		ArrayList<Player> recebedores = new ArrayList<Player>();
 		

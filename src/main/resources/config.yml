@@ -113,3 +113,16 @@ modules:
     # Disable if you don't need this
     #
     filter: true
+    #
+    # Prevents using too many repeated characters
+    #
+    prevent_spam: false
+    #
+    # Avoid repeating phrases in the chat
+    #
+    prevent_flood: false
+    #
+    # Allows you to send messages in capital letters.
+    # If disabled, the message will be in lowercase.
+    #
+    allow_uppercase: true
