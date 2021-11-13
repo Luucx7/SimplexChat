@@ -1,6 +1,7 @@
 package me.luucx7.simplexchat.core.managers;
 
 import me.luucx7.simplexchat.SimplexChat;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -25,23 +26,32 @@ public class MessageManager {
         int limit = SimplexChat.instance.getConfig().getInt("spam_limit");
 
         for (String msg : args) {
-            if (msg.length() > limit) check.add(msg);
+            if (msg.length() > limit) check.add(msg.toLowerCase());
         }
 
         if (check.isEmpty()) return false;
 
+        int count = 0;
         for (String msg : check) {
-            int count = 0;
-            for (char c : msg.toLowerCase().toCharArray()) {
-                for (char cc : msg.toLowerCase().toCharArray()) {
-                    if (c == cc) count++;
+            System.out.println(msg);
+
+            for (char c : msg.toCharArray()) {
+                count = 0;
+
+                for (int i = 0; i < msg.length(); i++) {
+                    if (c == msg.toCharArray()[i]) {
+                        if (i == 0 || c == msg.toCharArray()[i - 1]) count++;
+                        else count = 1;
+                    }
+                }
+
+                if (count > limit) {
+                    break;
                 }
             }
-
-            if (count > limit) return true;
         }
 
-        return false;
+        return count > limit;
     }
 
     public static String[] formatTitle(String[] args) {
