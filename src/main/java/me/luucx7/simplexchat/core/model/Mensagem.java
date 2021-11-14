@@ -41,29 +41,27 @@ public class Mensagem {
 	}
 
 	public Mensagem validar() {
-		if (sender.hasPermission("chat.filter.bypass")) {
-			this.isValid = true;
-			return this;
-		}
-
 		String msg = String.join(" ", mensagem);
 
-		if (SimplexChat.instance.getConfig().getBoolean("modules.prevent_spam") && MessageManager.isSpam(mensagem)) {
-			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("message_canceled_spam")));
-
+		if (SimplexChat.instance.getConfig().getBoolean("modules.chatformat.spam.enable") && !sender.hasPermission("chat.chatformat.spam.bypass") && MessageManager.isSpam(mensagem)) {
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("modules.chatformat.spam.message")));
 			return this;
 		}
 
-		if (SimplexChat.instance.getConfig().getBoolean("modules.prevent_flood")) {
+		if (SimplexChat.instance.getConfig().getBoolean("modules.chatformat.flood.enable") && !sender.hasPermission("chat.chatformat.flood.bypass")) {
 			if (MessageManager.isFlood((Player) sender, msg)) {
-				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("message_canceled_flood")));
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("modules.chatformat.flood.message")));
 
 				return this;
 			}
 			else MessageManager.setLastMessage(sender, msg);
 		}
 
-		if (!SimplexChat.instance.getConfig().getBoolean("modules.allow_uppercase")) {
+		if (SimplexChat.instance.getConfig().getBoolean("modules.chatformat.lowercase") && !sender.hasPermission("chat.chatformat.lowercase.bypass")) {
+			mensagem = MessageManager.formatLowerCase(mensagem);
+		}
+
+		if (SimplexChat.instance.getConfig().getBoolean("modules.chatformat.title_format")) {
 			mensagem = MessageManager.formatTitle(mensagem);
 		}
 

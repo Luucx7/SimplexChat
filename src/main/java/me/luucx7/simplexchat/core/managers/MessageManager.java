@@ -23,7 +23,7 @@ public class MessageManager {
 
     public static boolean isSpam(String[] args) {
         List<String> check = new ArrayList<>();
-        int limit = SimplexChat.instance.getConfig().getInt("spam_limit");
+        int limit = SimplexChat.instance.getConfig().getInt("modules.chatformat.spam.limit");
 
         for (String msg : args) {
             if (msg.length() > limit) check.add(msg.toLowerCase());
@@ -54,8 +54,14 @@ public class MessageManager {
         return count > limit;
     }
 
-    public static String[] formatTitle(String[] args) {
+    public static String[] formatLowerCase(String[] args) {
         char[] msgArray = String.join(" ", args).toLowerCase().toCharArray();
+
+        return String.valueOf(msgArray).split(" ");
+    }
+
+    public static String[] formatTitle(String[] args) {
+        char[] msgArray = String.join(" ", args).toCharArray();
         msgArray[0] = String.valueOf(msgArray[0]).toUpperCase().charAt(0);
 
         return String.valueOf(msgArray).split(" ");

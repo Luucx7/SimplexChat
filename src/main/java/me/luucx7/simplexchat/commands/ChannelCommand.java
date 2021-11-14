@@ -46,7 +46,7 @@ public class ChannelCommand extends Command {
 
 		Bukkit.getScheduler().runTaskAsynchronously(SimplexChat.instance, () -> {
 			Mensagem message = new Mensagem((Player) sender, args, canal);
-			message.preparar().enviar();
+			message.validar().preparar().enviar();
 		});
 		return false;
 	}

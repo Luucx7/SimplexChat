@@ -66,21 +66,6 @@ log_to_console: true
 console_log: '[<channel>] %luckperms_prefix%<player>> <message>'
 
 #
-# Spam limit in caracter
-#
-spam_limit: 10
-
-#
-# Message canceled because contain spam
-#
-message_canceled_spam: "&aMessage canceled because contain spam."
-
-#
-# Message canceled because it has already been sent
-#
-message_canceled_flood: "&aYou cannot send a message like the previous message."
-
-#
 # Enable or disable plugin components here
 # Every module have its own configuration file
 # so you will not get distracted with useless or unrelated
@@ -114,15 +99,30 @@ modules:
     #
     filter: true
     #
-    # Prevents using too many repeated characters
+    # Chat formatting
     #
-    prevent_spam: false
-    #
-    # Avoid repeating phrases in the chat
-    #
-    prevent_flood: false
-    #
-    # Allows you to send messages in capital letters.
-    # If disabled, the message will be in lowercase.
-    #
-    allow_uppercase: true
+    chatformat:
+        #
+        # Prohibits the use of many repeated characters
+        # According to the defined limit
+        # Example: aaaaa
+        #
+        spam:
+            enable: false
+            limit: 10
+            message: "&aMessage canceled because contain spam."
+        #
+        # Cancel sending repeated messages
+        #
+        flood:
+            enable: false
+            message: "&aYou cannot send a message like the previous message."
+        #
+        # Change the sentence to lowercase
+        # If disabled, the message will be sent as entered.
+        #
+        lowercase: false
+        #
+        # Always send a message with the first letter capitalized
+        #
+        title_format: false
