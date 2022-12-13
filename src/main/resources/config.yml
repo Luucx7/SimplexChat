@@ -98,3 +98,31 @@ modules:
     # Disable if you don't need this
     #
     filter: true
+    #
+    # Chat formatting
+    #
+    chatformat:
+        #
+        # Prohibits the use of many repeated characters
+        # According to the defined limit
+        # Example: aaaaa
+        #
+        spam:
+            enable: false
+            limit: 10
+            message: "&aMessage canceled because contain spam."
+        #
+        # Cancel sending repeated messages
+        #
+        flood:
+            enable: false
+            message: "&aYou cannot send a message like the previous message."
+        #
+        # Change the sentence to lowercase
+        # If disabled, the message will be sent as entered.
+        #
+        lowercase: false
+        #
+        # Always send a message with the first letter capitalized
+        #
+        title_format: false

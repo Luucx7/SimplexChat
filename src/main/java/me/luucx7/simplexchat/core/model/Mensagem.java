@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import de.themoep.minedown.MineDown;
 import github.scarsz.discordsrv.DiscordSRV;
+import me.luucx7.simplexchat.core.managers.MessageManager;
 import me.luucx7.simplexchat.core.nms.ActionBar;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -26,6 +27,7 @@ public class Mensagem {
 	BaseComponent[] mensagemFinal;
 	Channel canal;
 	int quantia;
+	boolean isValid;
 
 	public Mensagem(Player sender, String[] mensagem, Channel canal) {
 		this.sender = sender;
@@ -36,6 +38,35 @@ public class Mensagem {
 
 	public Mensagem (Player sender, String message, Channel channel) {
 		this(sender, message.split(" "), channel);
+	}
+
+	public Mensagem validar() {
+		String msg = String.join(" ", mensagem);
+
+		if (SimplexChat.instance.getConfig().getBoolean("modules.chatformat.spam.enable") && !sender.hasPermission("chat.chatformat.spam.bypass") && MessageManager.isSpam(mensagem)) {
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("modules.chatformat.spam.message")));
+			return this;
+		}
+
+		if (SimplexChat.instance.getConfig().getBoolean("modules.chatformat.flood.enable") && !sender.hasPermission("chat.chatformat.flood.bypass")) {
+			if (MessageManager.isFlood((Player) sender, msg)) {
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', SimplexChat.instance.getConfig().getString("modules.chatformat.flood.message")));
+
+				return this;
+			}
+			else MessageManager.setLastMessage(sender, msg);
+		}
+
+		if (SimplexChat.instance.getConfig().getBoolean("modules.chatformat.lowercase") && !sender.hasPermission("chat.chatformat.lowercase.bypass")) {
+			mensagem = MessageManager.formatLowerCase(mensagem);
+		}
+
+		if (SimplexChat.instance.getConfig().getBoolean("modules.chatformat.title_format")) {
+			mensagem = MessageManager.formatTitle(mensagem);
+		}
+
+		this.isValid = true;
+		return this;
 	}
 
 	public Mensagem preparar() {
@@ -92,6 +123,8 @@ public class Mensagem {
 	}
 
 	public void enviar() {
+		if (!isValid) return;
+
 		ArrayList<Player> recebedores = new ArrayList<Player>();
 		
 		if (canal.isBroadcast()) {
@@ -133,6 +166,5 @@ public class Mensagem {
 			if (StringUtils.isEmpty(mensagem.toString())) return;
 			DiscordSRV.getPlugin().processChatMessage(sender, mensagemString, canal.getName(), false);
 		}
-		return;
 	}
 }
