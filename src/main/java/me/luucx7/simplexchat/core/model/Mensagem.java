@@ -96,10 +96,25 @@ public class Mensagem {
 			});
 
 			SimplexChat.filterConfig.getStringList("replace").stream().forEach(s -> {
-				String toReplace = s.substring(0, s.indexOf(':'));
-				String replacer = s.substring(s.indexOf(':')+1);
+				int index = -1;
+				for (int i = 0; i < s.length(); i++) {
+					if (s.charAt(i) == ':') {
+						if (i > 0 && s.charAt(i - 1) == '\\') continue;
 
-				mensagemString = mensagemString.replace(toReplace, replacer);
+						index = i;
+						break;
+					}
+				}
+
+				if (index > 0 && s.charAt(index - 1) != '\\') {
+					String toReplace = s.substring(0, index);
+					String replacer = s.substring(index + 1);
+
+					toReplace = toReplace.replace("\\:", ":");
+					replacer = replacer.replace("\\:", ":");
+
+					mensagemString = mensagemString.replace(toReplace, replacer);
+				}
 			});
 		}
 
