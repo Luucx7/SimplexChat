@@ -79,14 +79,23 @@ public class Mensagem {
 		}
 
 		if (sender!=null) if (sender.hasPermission("chat.colored")) {
-			mensagemString = ChatColor.translateAlternateColorCodes('&', mensagemString);
+			//mensagemString = ChatColor.translateAlternateColorCodes('&', mensagemString);
 		} else {
 			mensagemString = ChatColor.stripColor(mensagemString).replace("", "")
 					.replace("show_entity=", "")
 					.replace("show_item=", "")
-					.replace("&", "")
-					.replace("color", "")
+					//.replace("&", "")
+					.replaceAll("&(#[0-9a-fA-F]{6}|[0-9a-fA-Fk-oK-OrR]{1})", "")
+					.replaceAll("\\[(.)+\\]\\((.)+\\)", "")
+					.replaceAll("\\&.[^\\s]+\\&", "")
 					;
+		}
+
+		// TODO: separate color handler from []() format handling
+
+		if (!(sender.hasPermission("chat.minedown.cmds"))) {
+			mensagemString = mensagemString.replaceAll("\\[(.)+\\]\\((.)*command(.)*\\)", "");
+			mensagemString = mensagemString.replaceAll("\\[(.)+\\]\\(\\/(.)*\\)", "");
 		}
 
 		if (SimplexChat.useFilter && !sender.hasPermission("chat.filter.bypass")) {
